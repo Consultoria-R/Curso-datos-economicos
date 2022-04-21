@@ -11,8 +11,12 @@
 ## Información
 
 **Duración:** 20 horas.
+
 **Modalidad:** en línea.
+
 **Plataforma:** zoom
+
 **Inicio:** 22 de abril de 2022
+
 **Horario:** viernes de 20:00 a 22:00 pm y sábado de 8:00 a 11:00 am.
 
