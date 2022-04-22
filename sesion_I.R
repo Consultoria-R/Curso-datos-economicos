@@ -312,4 +312,6 @@ summary(baseM)
 save(salud,
      file = "salud.RData")
 
+# Mencionar instalar tidyverse
+
 # FIN
