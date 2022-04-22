@@ -240,5 +240,4 @@ ingresos %>%
 ingresos %>% 
   count(educa_jefe,wt=factor)
 
-
 # FIN
