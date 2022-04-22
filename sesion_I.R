@@ -312,4 +312,7 @@ summary(baseM)
 save(salud,
      file = "salud.RData")
 
+# Instalación de tidyverse
+library(tidyverse)
+
 # FIN
