@@ -239,5 +239,5 @@ ingresos %>%
   count(sexo_jefe,wt=factor)
 ingresos %>% 
   count(educa_jefe,wt=factor)
-
+ 
 # FIN
