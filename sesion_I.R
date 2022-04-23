@@ -1,5 +1,5 @@
 # Bases de datos de series económicas en R
-# 22 de Abril 2022
+# 22 de Abril de 2022
 # Sesión I
 
 # Operaciones básicas
@@ -51,20 +51,25 @@ x[1]
 x[3]
 x[c(1,3)]
 x[c(4,2)]
+x[1:3]
+x[c(1,4)]
+x[c(5,3,1)]
 
 # Extracción por condiciones
+x <- c(9,7,2,5,1)
+x
 x<=2
 x[x<=2]
 x[x>=4]
 x[x>=1 & x<=4]  # Y
 x[x<=2 | x>=9]  # O
 x[-1]
-x[-3]
-x[2:4]
-x[-c(1,5)]
+x[-2]
+x[-c(1,3,5)]
 
 # Operaciones
 x <- c(9,4,2,5,10)
+x
 sum(x)                    # suma
 mean(x)                   # media
 median(x)                 # mediana
@@ -85,8 +90,10 @@ x <- c(1,3,6,12,NA,4,8,10,0,6,0,NA,5)
 x
 sum(x)
 sum(x,na.rm = TRUE)
+mean(x)
 mean(x,na.rm = TRUE)
 class(x)
+length(x)
 
 # Valores perdidos
 is.na(x)
@@ -94,6 +101,8 @@ sum(is.na(x))  # Suma de valores perdidos
 sum(!is.na(x)) # Diferentes de valores perdidos
 
 # Reemplazo
+x <- c(1,3,6,12,NA,4,8,10,0,6,0,NA,5)
+x
 x[3] <- 20
 x[1:2] <- 40
 x[c(4,7)] <- 80
@@ -109,8 +118,10 @@ x[is.na(x)] <- mean(x,na.rm = TRUE)
 x
 
 # Nueva base
+x[!is.na(x)]
 x_nueva <- x[!is.na(x)]
 x_nueva
+x <- x[!is.na(x)]
 
 # Objeto tipo carácter
 x <- c("1","1","2","1")
@@ -131,13 +142,18 @@ x <- factor(x,
             levels = 1:2,
             labels = c("Hombre","Mujer"))
 class(x)
+x
 
 # Contar variables categóricas
 table(x)
 prop.table(table(x))
+prop.table(table(x))*100
+round(prop.table(table(x))*100,4)
 
 # Ejemplo II
 x <- c(1,1,1,2,3)
+x
+
 
 factor(x,
        levels = 1:3,
@@ -152,7 +168,9 @@ class(x)
 table(x)
 accid <- table(x)
 prop.table(accid)
+prop.table(accid)*100
 
+# Fin sesión I
 # Pegar columnas
 (x <- 1:10)
 (y <- 21:30)
@@ -212,8 +230,7 @@ rm(list = ls())
 
 # Cargar archivos de Excel
 library(readxl)
-ensanut <- 
-  read_excel("dataset/ensanut_2018.xlsx")
+ensanut <- read_excel("dataset/ensanut_2018.xlsx")
 
 ensanut
 View(ensanut)
