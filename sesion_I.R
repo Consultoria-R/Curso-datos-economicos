@@ -171,9 +171,26 @@ prop.table(accid)
 prop.table(accid)*100
 
 # Fin sesión I
+
+# Repaso
+x <- 7
+x
+x <- c(8,6,7,2,6,5)
+sum(x)
+x <- c(5,4,9,NA,3)
+sum(x)
+sum(x,na.rm = TRUE)
+x[2]
+x[x<=5]
+
 # Pegar columnas
+1:10
+x <- 1:10
+x
 (x <- 1:10)
 (y <- 21:30)
+x
+y
 cbind(x,y)
 
 # Juntar elementos a un vector
@@ -189,32 +206,37 @@ mat
 mat[5,3]
 mat[4:5,2:3]
 mat[c(1,5),c(1,3)]
-mat[4:5,1:3]
-mat[4:5,]
-mat[,2:3]
-mat[,-1]
-mat
+mat[1:5,1:2]
+mat[,1:2]
+mat[,-3]
 
 # Cambio de nombres
 mat
 colnames(mat) <- c("A","B","C")
 row.names(mat) <- 1:5
-
 mat[3,3] <- NA
 
 # Operaciones de matrices
 mat
+
+# Filas
 rowSums(mat)
 rowSums(mat,na.rm = TRUE)
+
+# Columnas
 colSums(mat,na.rm = TRUE)
+
+# Media
 rowMeans(mat,na.rm = TRUE)
 colMeans(mat,na.rm = TRUE)
 
+# Pegar filas
 suma <- rowSums(mat,na.rm = TRUE)
 suma
 mat
 
 # Pegar columnas
+cbind(mat,suma)
 mat <- cbind(mat,suma)
 mat
 
@@ -231,7 +253,6 @@ rm(list = ls())
 # Cargar archivos de Excel
 library(readxl)
 ensanut <- read_excel("dataset/ensanut_2018.xlsx")
-
 ensanut
 View(ensanut)
 
@@ -249,16 +270,21 @@ ensanut$edad
 mean(ensanut$edad)
 mean(ensanut$no_cigarros_d)
 mean(ensanut$no_cigarros_d,na.rm = TRUE)
-mean(ensanut$no_cigarros_s,na.rm = TRUE)
+class(ensanut$no_cigarros_d)
 
 # Peso
 mean(ensanut$peso)
-min(ensanut$peso)
-max(ensanut$peso)
+summary(ensanut$peso)
 mean(ensanut$peso[ensanut$peso!=999])
 
 # Filtrar valores
+ensanut[ensanut$peso!=999,]
+ensanut[ensanut$peso!=999,"entidad"]
+ensanut[ensanut$peso!=999,c("entidad","sexo")]
+
+# Filtrar valores
 salud <- ensanut[ensanut$peso!=999,]
+salud
 mean(salud$peso)
 sd(salud$peso)
 median(salud$peso)
@@ -269,25 +295,33 @@ summary(salud$peso)
 salud
 
 # Convertir en factor: sexo
+salud
 summary(salud)
+factor(salud$sexo,
+       levels = 1:2,
+       labels = c("Hombre","Mujer"))
 salud$sexo <- factor(salud$sexo,
                      levels = 1:2,
                      labels = c("Hombre","Mujer"))
 table(salud$sexo)
-prop.table(table(salud$sexo))
+prop.table(table(salud$sexo))*100
+round(prop.table(table(salud$sexo))*100,2)
 
 # Convertir en factor: localidad
+salud
 salud$localidad <- factor(salud$localidad,
                           levels = 1:2,
                           labels = c("Urbano","Rural"))
 local <- table(salud$localidad)
-prop.table(local)
+local
+prop.table(local)*100
 
 # Convertir en factor: escolaridad
 salud
+as.factor(salud$escolaridad)
 salud$escolaridad <- as.factor(salud$escolaridad)
 table(salud$escolaridad)
-prop.table(table(salud$escolaridad))
+prop.table(table(salud$escolaridad))*100
 
 # Entidad
 salud
@@ -308,10 +342,22 @@ salud$region <- as.factor(salud$region)
 salud
 mean(salud$peso)
 mean(salud$peso[salud$sexo=="Hombre"])
+
+mean(salud$peso[salud$sexo=="Hombre"])
 mean(salud$peso[salud$sexo=="Mujer"])
+
+salud
+View(salud)
+
+mean(salud$peso)
+weighted.mean(salud$peso,salud$f_20mas)
 
 # Subbases
 salud
+subset(salud,sexo=="Hombre")
+subset(salud,sexo=="Hombre",select = 1:5)
+subset(salud,sexo=="Hombre",select = -6)
+
 saludH <- subset(salud,
                  sexo=="Hombre",
                  select = -6)
@@ -319,6 +365,11 @@ saludH
 
 # Borrar la base de datos
 rm(saludH)
+
+# Mujer
+salud
+subset(salud,
+       sexo=="Mujer" & region=="Centro" & estado_civil=="casado" & peso<=80)
 
 baseM <- subset(salud,
                 sexo=="Mujer" & region=="Centro")
